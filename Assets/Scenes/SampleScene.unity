@@ -2418,51 +2418,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soalSoal:
-  - hint: {fileID: 21300000, guid: ef7641f71f52f3e47af60b5bb8428625, type: 3}
-    pertanyaan: Berapa cabang serat dari serat utama?
-    level: LEVEL 1
-    jawabanTeks:
-    - 19
-    - 21
-    - 17
-    - 18
-    adalahBenar: 00000001
-  - hint: {fileID: 21300000, guid: 67e79f2c83a965e4aae513ab0a5623e1, type: 3}
-    pertanyaan: Berapa jumlah puncak gelombang?
-    level: LEVEL 2
-    jawabanTeks:
-    - 3
-    - 1
-    - 5
-    - 4
-    adalahBenar: 01000000
-  - hint: {fileID: 21300000, guid: 6bfe54fc055d3884088fa730b538f008, type: 3}
-    pertanyaan: Berapa jumlah ujung lancip pada semua daun?
-    level: LEVEL 3
-    jawabanTeks:
-    - 20
-    - 21
-    - 22
-    - 19
-    adalahBenar: 00000001
-  - hint: {fileID: 21300000, guid: b042deff0c883c54d92f62fd9846f272, type: 3}
-    pertanyaan: Berapa jumlah awan?
-    level: LEVEL 4
-    jawabanTeks:
-    - 8
-    - 5
-    - 6
-    - 7
-    adalahBenar: 01000000
-  - hint: {fileID: 21300000, guid: 9319810b0c9a5574faa9c2bd134ae3ba, type: 3}
-    pertanyaan: Berapa jumlah sinar matahari?
-    level: LEVEL 5
-    jawabanTeks:
-    - 15
-    - 16
-    - 12
-    - 10
-    adalahBenar: 01000000
+  - {fileID: 11400000, guid: 577983a409173bf4dae166a00aff5340, type: 2}
+  - {fileID: 11400000, guid: c0d06b65299b6ff46b5bece9b01faec1, type: 2}
+  - {fileID: 11400000, guid: 2c6cbc1b9b4b74f409b6539eb8e905c3, type: 2}
+  - {fileID: 11400000, guid: b1d46816fd3e8dd4d9f4fba4f10cbf7f, type: 2}
+  _playerProgress: {fileID: 11400000, guid: e21658cc13484f246a44d967c4b83d1a, type: 2}
   _tempatPertanyaan: {fileID: 1653087110}
   _tempatPilihanJawaban:
   - {fileID: 315515691}
