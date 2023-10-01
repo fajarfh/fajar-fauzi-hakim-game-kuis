@@ -5,7 +5,8 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField]
-    private LevelPackKuis[] _soalSoal = new LevelPackKuis[0];
+    //private LevelPackKuis[] _soalSoal = new LevelPackKuis[0];
+    private LevelPackKuis _soalSoal = null;
 
     [SerializeField]
     private PlayerProgress _playerProgress = null;
@@ -16,53 +17,87 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private UI_Jawaban[] _tempatPilihanJawaban = new UI_Jawaban[0];
 
+    [SerializeField]
+    private GameSceneManager _sceneManager = null;
+
+    [SerializeField]
+    private string _namaScenePilihMenu = string.Empty;
+
+    [SerializeField]
+    private InitialDataGameplay _initialData = null;
+
     private int _indexSoal = -1;
-    private int _indexPack = -1;
+    //private int _indexPack = -1;
 
     private void Start()
     {
-        if(!_playerProgress.MuatProgress())
-            _playerProgress.SimpanProgress();
-        
-        NextPack();//Reset LevelPack
+        //if(!_playerProgress.MuatProgress())
+        //    _playerProgress.SimpanProgress();
+
+        //NextPack();//Reset LevelPack
+
+        _soalSoal = _initialData.levelPack;
+        _indexSoal = _initialData.levelIndex - 1;
+
         NextLevel();//Reset Soal
 
+        UI_Jawaban.EventJawabSoal += UI_Jawaban_EventJawabSoal;
+
     }
 
-    
-    //Fungsi untuk berpindah Level Pack
-    public void NextPack()
+    private void OnDestroy()
     {
-
-        _indexPack++;
-        
-        //Jika level Pack sudah habis, kembali ke Level Pack pertama
-        if (_indexPack >= _soalSoal.Length)
-        {
-            _indexPack = 0;
-        }
-
+        UI_Jawaban.EventJawabSoal -= UI_Jawaban_EventJawabSoal;
     }
+
+    private void UI_Jawaban_EventJawabSoal(string jawaban, bool adalahBenar)
+    {
+        if (adalahBenar)
+        {
+            _playerProgress.progressData.koin += 20;
+        }
+    }
+
+
+    //Fungsi untuk berpindah Level Pack
+    //public void NextPack()
+    //{
+
+    //    _indexPack++;
+
+    //    //Jika level Pack sudah habis, kembali ke Level Pack pertama
+    //    if (_indexPack >= _soalSoal.Length)
+    //    {
+    //        _indexPack = 0;
+    //    }
+
+    //}
 
     public void NextLevel()
     {
 
         _indexSoal++;
 
-        if(_indexSoal >= _soalSoal[_indexPack].BanyakLevel)
+        if(_indexSoal >= _soalSoal.BanyakLevel)
         {
             //Jika soal sudah habis, lanjut ke LevelPack berikutnya
-            NextPack();
+            //NextPack();
+
             _indexSoal = 0;
+            _initialData.SaatKalah = false;
+            //Jika soal sudah habis, pindah ke scene _namaScenePilihMenu
+            _sceneManager.BukaScene(_namaScenePilihMenu);
+            return;
+
         }
 
-        LevelSoalKuis soal = _soalSoal[_indexPack].AmbilLevelKe(_indexSoal);
+        LevelSoalKuis soal = _soalSoal.AmbilLevelKe(_indexSoal);
 
-        int unicode = 65+_indexPack;
-        char character = (char)unicode;
-        string packLabel = character.ToString();
+        //int unicode = 65+_indexPack;
+        //char character = (char)unicode;
+        //string packLabel = character.ToString();
 
-        _tempatPertanyaan.SetPertanyaan($"Level {packLabel}-{_indexSoal+1}", soal.pertanyaan, soal.hint);
+        _tempatPertanyaan.SetPertanyaan($"{_soalSoal.name}-{_indexSoal+1}", soal.pertanyaan, soal.hint);
 
         for(int i=0; i< _tempatPilihanJawaban.Length; i++)
         {

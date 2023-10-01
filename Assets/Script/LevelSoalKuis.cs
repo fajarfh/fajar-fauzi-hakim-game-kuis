@@ -11,6 +11,7 @@ public class LevelSoalKuis : ScriptableObject
 {
     public Sprite hint = null;
     public string pertanyaan = string.Empty;
+    public int levelPackIndex = 0;
     
     [System.Serializable]
     public struct OpsiJawaban
