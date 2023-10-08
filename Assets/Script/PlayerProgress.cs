@@ -17,12 +17,20 @@ public class PlayerProgress : ScriptableObject
         public Dictionary<string, int> progressLevel;
     }
 
+    [SerializeField]
+    private string _startingLevelPackName = string.Empty;
+
     public string fileName = "playerprogress.txt";
     public MainData progressData = new MainData();
 
     public void SimpanProgress()
     {
+
+#if UNITY_EDITOR
         string directory = Application.dataPath + "/Temporary/";
+#elif (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        string directory = Application.persistentDataPath + "/ProgresLokal";
+#endif
         string path = directory + fileName;
 
         if (!Directory.Exists(directory))
@@ -40,13 +48,14 @@ public class PlayerProgress : ScriptableObject
             
         }
 
-        progressData.koin = 200;
+        //Data Sampel
+        //progressData.koin = 200;
 
-        if (progressData.progressLevel == null)
-            progressData.progressLevel = new();
+        //if (progressData.progressLevel == null)
+        //    progressData.progressLevel = new();
 
-        progressData.progressLevel.Add("Level Pack 1", 3);
-        progressData.progressLevel.Add("Level Pack 4", 1);
+        //progressData.progressLevel.Add("Level Pack 1", 3);
+        //progressData.progressLevel.Add("Level Pack 4", 1);
 
         // Mode Penimpanan Tanpa Binary
         /*string kontenData = $"Koin: {progressData.koin}\nProgress:\n";          
@@ -56,6 +65,14 @@ public class PlayerProgress : ScriptableObject
         }
         
         File.WriteAllText(path, kontenData);*/
+
+        if(progressData.progressLevel == null)
+        {
+            progressData.progressLevel = new();
+            progressData.koin = 0;
+            progressData.progressLevel.Add(_startingLevelPackName, 0);
+        }
+
 
         // Mode Penyimpanan Binary
         try
@@ -95,10 +112,12 @@ public class PlayerProgress : ScriptableObject
 
     public bool MuatProgress()
     {
+#if UNITY_EDITOR
         string directory = Application.dataPath + "/Temporary/";
+#elif (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        string directory = Application.persistentDataPath + "/ProgresLokal";
+#endif
         string path = directory + fileName;
-
-        
 
         try
         {
@@ -111,6 +130,12 @@ public class PlayerProgress : ScriptableObject
             fileStream.Dispose();
 
             Debug.Log($"{progressData.koin}; {progressData.progressLevel.Count}");
+
+            foreach (var v in progressData.progressLevel)
+            {
+                Debug.Log(v.Key);
+                Debug.Log(v.Value);
+            }
 
             //Pemuatan tanpa Binaryformatter
             /*var reader = new BinaryReader(fileStream);

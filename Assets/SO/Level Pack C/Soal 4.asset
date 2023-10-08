@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hint: {fileID: 21300000, guid: 0ea1fc7b00b9b6e44b5abd9bfcf45f5c, type: 3}
   pertanyaan: Warna dari Mawar ?
+  levelPackIndex: 3
   opsiJawaban:
   - jawabanTeks: Merah
     adalahBenar: 1

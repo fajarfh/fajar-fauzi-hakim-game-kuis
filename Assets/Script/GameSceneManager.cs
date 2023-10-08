@@ -17,12 +17,14 @@ public class GameSceneManager : MonoBehaviour
         //string cekScene = SceneManager.GetActiveScene().name;
         //Debug.Log(cekScene);
         //SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetSceneByName(namaScene));
+        _playerProgress.SimpanProgress();
         SceneManager.LoadScene(namaScene);
     }
 
     private void OnApplicationQuit()
     {
         _initialData.SaatKalah = false;
+        _initialData.levelIndex = 0;
         _playerProgress.progressData.koin = 0;
     }
 

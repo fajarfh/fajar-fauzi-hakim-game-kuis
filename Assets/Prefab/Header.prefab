@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 5700323459632814091}
   - component: {fileID: 5662593827577923659}
   - component: {fileID: 3746315157673770685}
+  - component: {fileID: 8166689306086473594}
   - component: {fileID: 2279181134011649221}
   m_Layer: 5
   m_Name: Back Button
@@ -286,6 +287,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8166689306086473594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263269563837062127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47053cbf4e2a73246a682cf82508ae00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2279181134011649221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,13 +343,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameSceneManager, Assembly-CSharp
-        m_MethodName: BukaScene
-        m_Mode: 5
+      - m_Target: {fileID: 8166689306086473594}
+        m_TargetAssemblyTypeName: PemanggilSuara, Assembly-CSharp
+        m_MethodName: PanggilSuara
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 8300000, guid: ce88771b12ad98c43bf81307cc5245dc, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Start Menu

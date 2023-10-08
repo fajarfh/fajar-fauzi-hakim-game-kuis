@@ -14,6 +14,18 @@ public class UI_PesanLevel : MonoBehaviour
     [SerializeField]
     private GameObject _opsiKalah = null;
 
+    [SerializeField]
+    private Animator _animator = null;
+
+    [SerializeField]
+    private PemanggilSuara _panggilSuara = null;
+
+    [SerializeField]
+    private AudioClip _suaraKebenaran = null;
+
+    [SerializeField]
+    private AudioClip _suaraKesalahan = null;
+
     public string Pesan
     {
         get => _tempatPesan.text;
@@ -39,11 +51,18 @@ public class UI_PesanLevel : MonoBehaviour
         {
             _opsiMenang.SetActive(true);
             _opsiKalah.SetActive(false);
+            
+            _animator.SetTrigger("KeBetulan");
+            _panggilSuara.PanggilSuara(_suaraKebenaran);
+            //Debug.Log("Ketrigger Betulan");
         }
         else
         {
             _opsiMenang.SetActive(false);
             _opsiKalah.SetActive(true);
+            _animator.SetTrigger("KeSalahan");
+            _panggilSuara.PanggilSuara(_suaraKesalahan);
+            //Debug.Log("Ketrigger Salahanan");
         }
 
 

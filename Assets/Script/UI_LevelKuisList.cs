@@ -48,7 +48,7 @@ public class UI_LevelKuisList : MonoBehaviour
         UI_OpsiLevelKuis.EventSaatKlik -= UI_OpsiLevelKuis_EventSaatKlik;
     }
 
-    public void unloadLevelPack(LevelPackKuis levelPack)
+    public void UnloadLevelPack(LevelPackKuis levelPack, PlayerProgress.MainData playerData)
     {
 
         HapusIsiKonten();
@@ -56,14 +56,18 @@ public class UI_LevelKuisList : MonoBehaviour
         _levelPack = levelPack;
         _levelPackTitle.text = levelPack.name;
 
-        for(int i = 0; i <_levelPack.BanyakLevel; i++)
+        int x = playerData.progressLevel[levelPack.name];
+
+        for (int i = 0; i <_levelPack.BanyakLevel; i++)
         {
             var t = Instantiate(_tombolLevel);
-
+            
             t.SetLevelKuis(levelPack.AmbilLevelKe(i), i);
 
             t.transform.SetParent(_content);
             t.transform.localScale = Vector3.one;
+
+            if ((i != 0) && (i > x)) t.KunciLevelKuis();
         }
     }
 

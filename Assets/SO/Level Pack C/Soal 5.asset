@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hint: {fileID: 21300000, guid: 1ed262177d00e4c4fa262af4bdf2db31, type: 3}
   pertanyaan: Warna dari Langit ?
+  levelPackIndex: 4
   opsiJawaban:
   - jawabanTeks: Merah
     adalahBenar: 0

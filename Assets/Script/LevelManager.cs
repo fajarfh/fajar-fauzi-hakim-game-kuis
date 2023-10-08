@@ -43,6 +43,8 @@ public class LevelManager : MonoBehaviour
 
         UI_Jawaban.EventJawabSoal += UI_Jawaban_EventJawabSoal;
 
+        AudioManager.instance.PlayBGM(1);
+
     }
 
     private void OnDestroy()
@@ -52,9 +54,26 @@ public class LevelManager : MonoBehaviour
 
     private void UI_Jawaban_EventJawabSoal(string jawaban, bool adalahBenar)
     {
-        if (adalahBenar)
+        if (!adalahBenar) return;
+
+        string namaLevelPack = _soalSoal.name;
+        int levelTerakhir = _playerProgress.progressData.progressLevel[namaLevelPack];
+
+        if(_indexSoal + 1 > levelTerakhir)
         {
+        
             _playerProgress.progressData.koin += 20;
+
+            if (!_playerProgress.progressData.progressLevel.ContainsKey(_soalSoal.name))
+            {
+                _playerProgress.progressData.progressLevel.Add(_soalSoal.name, _indexSoal+1);
+            }
+            else
+            {
+                _playerProgress.progressData.progressLevel[_soalSoal.name] = _indexSoal+1;
+            }
+
+                
         }
     }
 
@@ -86,6 +105,7 @@ public class LevelManager : MonoBehaviour
             _indexSoal = 0;
             _initialData.SaatKalah = false;
             //Jika soal sudah habis, pindah ke scene _namaScenePilihMenu
+            _playerProgress.SimpanProgress();
             _sceneManager.BukaScene(_namaScenePilihMenu);
             return;
 

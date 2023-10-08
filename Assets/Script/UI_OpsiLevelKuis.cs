@@ -18,12 +18,17 @@ public class UI_OpsiLevelKuis : MonoBehaviour
     [SerializeField]
     private Button _tombolLevel = null;
 
+    //[SerializeField]
+    //private bool _terkunci = false;
+
     private void Start()
     {
         if (_levelKuis != null)
             SetLevelKuis(_levelKuis, _levelKuis.levelPackIndex);
 
         _tombolLevel.onClick.AddListener(SaatClick);
+
+        
 
     }
 
@@ -44,6 +49,18 @@ public class UI_OpsiLevelKuis : MonoBehaviour
     {
         //Debug.Log("TOT");
         EventSaatKlik?.Invoke(_levelKuis.levelPackIndex);
+    }
+
+    public void KunciLevelKuis()
+    {
+    //    _terkunci = true;
+        this.GetComponent<Button>().interactable = false;
+    }
+
+    public void BukaLevelKuis()
+    {
+    //    _terkunci = false;
+        this.GetComponent<Button>().interactable = true;
     }
 
 }
